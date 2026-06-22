@@ -99,6 +99,40 @@
   .skeleton::after {
     @apply absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/40 to-transparent content-[''] dark:via-white/10;
   }
+
+  /* Subtle grid background for adding depth to sections */
+  .bg-grid {
+    background-image: linear-gradient(
+        to right,
+        hsl(var(--border) / 0.6) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, hsl(var(--border) / 0.6) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  /* Subtle dotted background */
+  .bg-dots {
+    background-image: radial-gradient(
+      hsl(var(--border) / 0.9) 1px,
+      transparent 1px
+    );
+    background-size: 22px 22px;
+  }
+
+  /* Fades a pattern out towards the edges so it never looks harsh */
+  .pattern-mask {
+    -webkit-mask-image: radial-gradient(
+      ellipse 75% 65% at 50% 40%,
+      #000 60%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      ellipse 75% 65% at 50% 40%,
+      #000 60%,
+      transparent 100%
+    );
+  }
 }
 
 /* Custom scrollbar for a premium feel */
