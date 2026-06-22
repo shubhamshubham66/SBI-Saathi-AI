@@ -3,7 +3,7 @@ import { Reveal } from "@/components/motion/reveal";
 
 export function TrustMetrics() {
   return (
-    <section className="py-16">
+    <section id="impact" className="py-16">
       <div className="container">
         <Reveal>
           <div className="glass-card overflow-hidden rounded-3xl">
