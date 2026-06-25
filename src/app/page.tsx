@@ -15,6 +15,7 @@ import { Testimonials } from "@/components/sections/testimonials";
 import { SecurityTrust } from "@/components/sections/security-trust";
 import { Faq } from "@/components/sections/faq";
 import { CallToAction } from "@/components/sections/cta";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -23,6 +24,21 @@ export default function Home() {
       <main id="main-content">
         <Hero />
         <LanguagesMarquee />
+
+        {/* SBI Banner — 50% width, centered */}
+        <section className="container py-10">
+          <div className="mx-auto w-full max-w-[50%] overflow-hidden rounded-3xl shadow-xl">
+            <Image
+              src="/sbi-banner.jpg"
+              alt="SBI Saathi AI Banner"
+              width={800}
+              height={400}
+              className="w-full object-cover"
+              priority
+            />
+          </div>
+        </section>
+
         <PortalServices />
         <TrustMetrics />
         <ImpactDetails />
