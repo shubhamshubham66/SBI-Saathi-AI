@@ -48,7 +48,19 @@ export const mainNavLinks: NavLink[] = [
       { label: "Government Scheme Assistance", href: "/#scheme-assistance" },
     ],
   },
-  { label: "Services", href: "/#services" },
+  {
+    label: "Services",
+    href: "/services",
+    children: [
+      { label: "Account Opening", href: "/services#account-opening" },
+      { label: "Savings Account", href: "/services#savings-account" },
+      { label: "Fixed Deposit", href: "/services#fixed-deposit" },
+      { label: "Personal Loan", href: "/services#personal-loan" },
+      { label: "Education Loan", href: "/services#education-loan" },
+      { label: "Home Loan", href: "/services#home-loan" },
+      { label: "UPI & Digital Payments", href: "/services#upi-digital-payments" },
+    ],
+  },
   {
     label: "How It Works",
     href: "/#how-it-works",
