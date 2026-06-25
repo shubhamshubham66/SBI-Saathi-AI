@@ -22,6 +22,7 @@ export function LoginForm() {
   const [otp, setOtp] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
+  const [devOtp, setDevOtp] = React.useState<string | null>(null);
 
   const timedOut = params.get("reason") === "timeout";
 
@@ -40,6 +41,7 @@ export function LoginForm() {
         setError(data.error ?? "Couldn't send the code. Please try again.");
         return;
       }
+      setDevOtp(data.devOtp ?? null);
       setStep("otp");
     } catch {
       setError("Network error. Please check your connection and retry.");
@@ -197,6 +199,12 @@ export function LoginForm() {
                   className="h-12 w-full rounded-xl border border-border/70 bg-background/70 px-3 text-center text-lg tracking-[0.5em] outline-none transition-colors focus:border-brand-400"
                 />
               </div>
+
+              {devOtp && (
+                <p className="rounded-lg bg-brand-500/10 px-3 py-2 text-center text-sm text-brand-700 dark:text-brand-300">
+                  Your OTP: <strong>{devOtp}</strong>
+                </p>
+              )}
 
               {error && (
                 <p role="alert" className="rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive">
