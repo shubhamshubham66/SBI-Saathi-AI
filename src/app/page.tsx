@@ -7,6 +7,7 @@ import { PortalServices } from "@/components/sections/portal-services";
 import { TrustMetrics } from "@/components/sections/trust-metrics";
 import { ImpactDetails } from "@/components/sections/impact-details";
 import { Features } from "@/components/sections/features";
+import { FeatureDetails } from "@/components/sections/feature-details";
 import { HowItWorks } from "@/components/sections/how-it-works";
 import { WorkflowPipeline } from "@/components/sections/workflow-pipeline";
 import { SchemeHighlights } from "@/components/sections/scheme-highlights";
@@ -25,6 +26,7 @@ export default function Home() {
         <TrustMetrics />
         <ImpactDetails />
         <Features />
+        <FeatureDetails />
         <HowItWorks />
         <WorkflowPipeline />
         <SchemeHighlights />

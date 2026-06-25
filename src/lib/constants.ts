@@ -13,6 +13,9 @@ import {
   Sprout,
   TrendingUp,
   Rocket,
+  Languages,
+  Smartphone,
+  FileCheck,
   type LucideIcon,
 } from "lucide-react";
 
@@ -33,7 +36,18 @@ export interface NavLink {
 export const mainNavLinks: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Features", href: "/#features" },
+  {
+    label: "Features",
+    href: "/#features",
+    children: [
+      { label: "Multilingual Support", href: "/#multilingual-support" },
+      { label: "Voice Assistant", href: "/#voice-assistant" },
+      { label: "Personalized Recommendations", href: "/#personalized-recommendations" },
+      { label: "Financial Literacy", href: "/#financial-literacy" },
+      { label: "Digital Payment Guidance", href: "/#digital-payments" },
+      { label: "Government Scheme Assistance", href: "/#scheme-assistance" },
+    ],
+  },
   { label: "Services", href: "/#services" },
   {
     label: "How It Works",
@@ -468,6 +482,94 @@ export const impactBlocks: ImpactBlock[] = [
       "Offline & low-bandwidth modes",
       "Proactive money-health nudges",
       "Deeper accessibility support",
+    ],
+  },
+];
+
+
+/* -------------------------------------------------------------------------- */
+/*  Features — detailed sections (inside sections)                            */
+/* -------------------------------------------------------------------------- */
+
+export interface FeatureDetail {
+  id: string;
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  points: string[];
+}
+
+export const featureDetails: FeatureDetail[] = [
+  {
+    id: "multilingual-support",
+    icon: Languages,
+    title: "Multilingual Support",
+    description:
+      "Bank in the language you think in. Saathi understands and replies in 20+ Indian languages.",
+    points: [
+      "20+ Indian languages",
+      "Auto language detection",
+      "Switch languages mid-chat",
+    ],
+  },
+  {
+    id: "voice-assistant",
+    icon: Mic,
+    title: "Voice Assistant",
+    description:
+      "Just speak — no typing needed. Perfect for users who find reading or typing difficult.",
+    points: [
+      "Speak instead of type",
+      "Spoken answers back to you",
+      "Great for low-literacy users",
+    ],
+  },
+  {
+    id: "personalized-recommendations",
+    icon: Sparkles,
+    title: "Personalized Recommendations",
+    description:
+      "Tell Saathi a little about yourself and get product suggestions that genuinely fit your needs.",
+    points: [
+      "Tailored to your profile",
+      "Right products, right time",
+      "Clear, jargon-free reasons",
+    ],
+  },
+  {
+    id: "financial-literacy",
+    icon: GraduationCap,
+    title: "Financial Literacy",
+    description:
+      "Learn money basics at your own pace — savings, credit, fraud safety and more, explained simply.",
+    points: [
+      "Bite-sized friendly lessons",
+      "Savings, credit & budgeting",
+      "Spot and avoid scams",
+    ],
+  },
+  {
+    id: "digital-payments",
+    icon: Smartphone,
+    title: "Digital Payment Guidance",
+    description:
+      "Step-by-step help with UPI, mobile banking and safe digital payments — without the fear.",
+    points: [
+      "Activate & use UPI",
+      "Safe payment habits",
+      "Troubleshoot common issues",
+    ],
+  },
+  {
+    id: "scheme-assistance",
+    icon: FileCheck,
+    title: "Government Scheme Assistance",
+    description:
+      "Discover government schemes you may be eligible for and get simple steps on how to apply.",
+    points: [
+      "Check your eligibility",
+      "Simple application steps",
+      "Never miss a benefit",
     ],
   },
 ];
