@@ -99,6 +99,10 @@ const config: Config = {
         shimmer: {
           "100%": { transform: "translateX(100%)" },
         },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -106,6 +110,7 @@ const config: Config = {
         "gradient-shift": "gradient-shift 8s ease infinite",
         float: "float 6s ease-in-out infinite",
         shimmer: "shimmer 1.5s infinite",
+        marquee: "marquee 30s linear infinite",
       },
     },
   },
