@@ -5,6 +5,14 @@ import {
   Sparkles,
   ShieldCheck,
   GraduationCap,
+  Cpu,
+  Workflow,
+  Send,
+  Users,
+  Landmark,
+  Sprout,
+  TrendingUp,
+  Rocket,
   type LucideIcon,
 } from "lucide-react";
 
@@ -18,6 +26,7 @@ export const siteConfig = {
 export interface NavLink {
   label: string;
   href: string;
+  children?: NavLink[];
 }
 
 /** Primary navbar items (7) — mix of pages and on-page anchors. */
@@ -26,8 +35,27 @@ export const mainNavLinks: NavLink[] = [
   { label: "About", href: "/about" },
   { label: "Features", href: "/#features" },
   { label: "Services", href: "/#services" },
-  { label: "How It Works", href: "/#how-it-works" },
-  { label: "Impact", href: "/#impact" },
+  {
+    label: "How It Works",
+    href: "/#how-it-works",
+    children: [
+      { label: "User Interaction", href: "/#user-interaction" },
+      { label: "AI Processing", href: "/#ai-processing" },
+      { label: "Agent Workflow", href: "/#agent-workflow" },
+      { label: "Response Generation", href: "/#response-generation" },
+    ],
+  },
+  {
+    label: "Impact",
+    href: "/#impact",
+    children: [
+      { label: "Benefits for Customers", href: "/#benefits-customers" },
+      { label: "Benefits for SBI", href: "/#benefits-sbi" },
+      { label: "Rural Banking Inclusion", href: "/#rural-inclusion" },
+      { label: "Digital Adoption Statistics", href: "/#digital-adoption" },
+      { label: "Future Roadmap", href: "/#future-roadmap" },
+    ],
+  },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -292,5 +320,154 @@ export const faqs: Faq[] = [
     question: "Can Saathi open an account or move money for me?",
     answer:
       "Saathi guides you with clear, simple steps and points you in the right direction — but you always stay in control and complete actions through your own bank.",
+  },
+];
+
+
+/* -------------------------------------------------------------------------- */
+/*  How It Works — detailed pipeline (inside sections)                        */
+/* -------------------------------------------------------------------------- */
+
+export interface WorkflowStage {
+  id: string;
+  step: string;
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  points: string[];
+}
+
+export const workflowStages: WorkflowStage[] = [
+  {
+    id: "user-interaction",
+    step: "01",
+    icon: Mic,
+    title: "User Interaction",
+    description:
+      "You start a conversation the way that feels natural — speaking or typing in any of 20+ Indian languages.",
+    points: [
+      "Voice or text input, your choice",
+      "Works in 20+ Indian languages",
+      "No banking jargon required",
+    ],
+  },
+  {
+    id: "ai-processing",
+    step: "02",
+    icon: Cpu,
+    title: "AI Processing",
+    description:
+      "Saathi transcribes speech, detects your language, and understands the real intent behind your question.",
+    points: [
+      "Speech-to-text & language detection",
+      "Intent and entity recognition",
+      "Context kept across the chat",
+    ],
+  },
+  {
+    id: "agent-workflow",
+    step: "03",
+    icon: Workflow,
+    title: "Agent Workflow",
+    description:
+      "The right tools kick in — matching schemes, building recommendations, and pulling verified banking knowledge.",
+    points: [
+      "Scheme eligibility matching",
+      "Personalised recommendations",
+      "Grounded in trusted knowledge",
+    ],
+  },
+  {
+    id: "response-generation",
+    step: "04",
+    icon: Send,
+    title: "Response Generation",
+    description:
+      "You get a clear, friendly answer with simple next steps — replied back in your own language, by voice or text.",
+    points: [
+      "Plain-language, jargon-free replies",
+      "Actionable next steps",
+      "Spoken back in your language",
+    ],
+  },
+];
+
+/* -------------------------------------------------------------------------- */
+/*  Impact — detailed sections (inside sections)                              */
+/* -------------------------------------------------------------------------- */
+
+export interface ImpactBlock {
+  id: string;
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  points: string[];
+}
+
+export const impactBlocks: ImpactBlock[] = [
+  {
+    id: "benefits-customers",
+    icon: Users,
+    title: "Benefits for Customers",
+    description:
+      "Banking becomes approachable for everyone — regardless of language, literacy, or experience.",
+    points: [
+      "Guidance in your mother tongue",
+      "No fear of asking 'basic' questions",
+      "Help available any time, day or night",
+      "Stay protected from fraud and scams",
+    ],
+  },
+  {
+    id: "benefits-sbi",
+    icon: Landmark,
+    title: "Benefits for SBI",
+    description:
+      "A scalable assistant that deepens customer relationships while easing the load on branches and call centres.",
+    points: [
+      "Lower support costs at scale",
+      "Higher product awareness & adoption",
+      "Consistent, compliant guidance",
+      "Reach under-served customers",
+    ],
+  },
+  {
+    id: "rural-inclusion",
+    icon: Sprout,
+    title: "Rural Banking Inclusion",
+    description:
+      "Bringing trusted banking support to villages and small towns where branches are far and literacy varies.",
+    points: [
+      "Voice-first for low-literacy users",
+      "Works on basic smartphones",
+      "Awareness of welfare schemes",
+      "Bridges the last-mile gap",
+    ],
+  },
+  {
+    id: "digital-adoption",
+    icon: TrendingUp,
+    title: "Digital Adoption Statistics",
+    description:
+      "India's digital banking momentum shows just how many people a multilingual assistant can empower.",
+    points: [
+      "500M+ potential users reachable",
+      "20+ languages spoken across India",
+      "UPI now part of everyday payments",
+      "Mobile-first growth in rural areas",
+    ],
+  },
+  {
+    id: "future-roadmap",
+    icon: Rocket,
+    title: "Future Roadmap",
+    description:
+      "Where Saathi is headed next — deeper personalisation and even wider, more inclusive coverage.",
+    points: [
+      "More regional languages & dialects",
+      "Offline & low-bandwidth modes",
+      "Proactive money-health nudges",
+      "Deeper accessibility support",
+    ],
   },
 ];
