@@ -20,6 +20,18 @@ export interface NavLink {
   href: string;
 }
 
+/** Primary navbar items (7) — mix of pages and on-page anchors. */
+export const mainNavLinks: NavLink[] = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Features", href: "/#features" },
+  { label: "Services", href: "/#services" },
+  { label: "How It Works", href: "/#how-it-works" },
+  { label: "Impact", href: "/#impact" },
+  { label: "Contact", href: "/contact" },
+];
+
+/** Tool links used in the footer "Explore" column. */
 export const navLinks: NavLink[] = [
   { label: "Assistant", href: "/assistant" },
   { label: "Recommendations", href: "/recommendations" },

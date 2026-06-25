@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Sparkles, Twitter, Linkedin, Github, Youtube, Mail } from "lucide-react";
+import Image from "next/image";
+import { Twitter, Linkedin, Github, Youtube, Mail } from "lucide-react";
 import { navLinks, siteConfig } from "@/lib/constants";
 import { NewsletterForm } from "@/components/layout/newsletter-form";
 
@@ -57,9 +58,15 @@ export function Footer() {
         {/* Main footer */}
         <div className="flex flex-col gap-10 pb-12 md:flex-row md:items-start md:justify-between">
           <div className="max-w-sm">
-            <Link href="/" className="flex items-center gap-2 font-semibold">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-gradient text-white shadow-md">
-                <Sparkles className="h-5 w-5" />
+            <Link href="/" className="flex items-center gap-2.5 font-semibold">
+              <span className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-border">
+                <Image
+                  src="/sbi-logo.jpg"
+                  alt="SBI Saathi AI logo"
+                  width={40}
+                  height={40}
+                  className="h-full w-full object-contain p-0.5"
+                />
               </span>
               <span className="text-lg tracking-tight">{siteConfig.name}</span>
             </Link>

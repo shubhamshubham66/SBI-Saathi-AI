@@ -9,7 +9,7 @@ import { Reveal } from "@/components/motion/reveal";
  */
 export function PortalServices() {
   return (
-    <section className="relative py-16 sm:py-20">
+    <section id="services" className="relative py-16 sm:py-20">
       <div className="pointer-events-none absolute inset-0 bg-grid pattern-mask opacity-60" />
       <div className="container relative">
         <Reveal className="mx-auto max-w-2xl text-center">
