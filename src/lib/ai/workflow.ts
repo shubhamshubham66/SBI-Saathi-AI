@@ -8,6 +8,7 @@ import { SUPPORTED_LANGUAGES } from "@/types";
 import { detectIntent } from "./intent";
 import { retrieveKnowledge, type KnowledgeEntry } from "./knowledge";
 import { generateCompletion, getModelName } from "./provider";
+import { localizedFallback } from "./fallback-i18n";
 
 export interface WorkflowInput {
   message: string;
@@ -30,12 +31,14 @@ function languageLabel(code: LanguageCode): string {
 
 /** Builds the empathetic system prompt that defines Saathi's personality. */
 function buildSystemPrompt(language: LanguageCode): string {
+  const label = languageLabel(language);
   return [
     "You are Saathi, a warm, patient banking companion for people across India.",
     "Speak like a kind, trustworthy friend — never robotic or full of jargon.",
     "Keep answers short, clear and reassuring. Use simple words and, where helpful, gentle step-by-step guidance.",
     "Never ask for sensitive details like full card numbers, OTPs or UPI PINs.",
-    `Reply in this language: ${languageLabel(language)}.`,
+    `IMPORTANT: Reply ONLY in ${label} (language code: ${language}), using its native script.`,
+    "Do not reply in English or any other language unless the user explicitly writes to you in that language.",
     "If you are unsure, say so honestly and suggest a safe next step.",
   ].join(" ");
 }
@@ -65,25 +68,22 @@ function buildUserPrompt(
 
 /**
  * A friendly grounded reply used when no AI provider is configured, or when a
- * provider call fails. Keeps the assistant genuinely useful offline.
+ * provider call fails. Localized so the assistant always answers in the
+ * language the user selected. For English we also weave in the most relevant
+ * retrieved fact; for other languages we use a clean localized reply (the
+ * retrieved facts are English-only, so mixing them in would break the
+ * single-language experience).
  */
 function buildFallbackReply(
   intent: ConversationIntent,
-  knowledge: KnowledgeEntry[]
+  knowledge: KnowledgeEntry[],
+  language: LanguageCode
 ): string {
-  if (knowledge.length > 0) {
+  if (language === "en" && knowledge.length > 0) {
     const top = knowledge[0];
     return `Happy to help with this! ${top.content}\n\nWould you like me to walk you through it step by step?`;
   }
-
-  switch (intent) {
-    case ConversationIntent.SchemeDiscovery:
-      return "I'd love to help you find schemes you may be eligible for. Could you tell me your age, your rough monthly income, and what you do for work? With that, I can suggest a few that fit.";
-    case ConversationIntent.ProductRecommendation:
-      return "Let's figure out the best step for you. Tell me a little about yourself — your age, what you do, and what you're hoping to achieve — and I'll suggest options that genuinely suit you.";
-    default:
-      return "I'm here to help with anything around banking — activating UPI, saving money, finding government schemes, or staying safe from fraud. What would you like to start with?";
-  }
+  return localizedFallback(language, intent);
 }
 
 /**
@@ -113,7 +113,7 @@ export async function runAgentWorkflow(
     user: buildUserPrompt(input, knowledge),
   });
 
-  const reply = aiReply ?? buildFallbackReply(intent, knowledge);
+  const reply = aiReply ?? buildFallbackReply(intent, knowledge, input.language);
 
   return {
     reply,
