@@ -4,10 +4,11 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, LogOut, UserRound, LogIn } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { useAuth } from "@/components/auth/auth-provider";
 import { mainNavLinks, siteConfig, type NavLink } from "@/lib/constants";
 
 export function Navbar() {
@@ -15,6 +16,10 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [openDropdown, setOpenDropdown] = React.useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = React.useState<string | null>(null);
+  const [userMenuOpen, setUserMenuOpen] = React.useState(false);
+  const { user, loading, logout } = useAuth();
+
+  const firstName = user?.name?.split(" ")[0] ?? "Account";
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -111,6 +116,74 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
+
+          {/* Auth control (desktop) */}
+          {!loading && !user && (
+            <Button asChild variant="outline" size="sm" className="hidden sm:flex">
+              <Link href="/login">
+                <LogIn className="h-4 w-4" />
+                Log In
+              </Link>
+            </Button>
+          )}
+          {!loading && user && (
+            <div
+              className="relative hidden sm:block"
+              onMouseEnter={() => setUserMenuOpen(true)}
+              onMouseLeave={() => setUserMenuOpen(false)}
+            >
+              <button
+                aria-haspopup="true"
+                aria-expanded={userMenuOpen}
+                onClick={() => setUserMenuOpen((o) => !o)}
+                className="flex items-center gap-2 rounded-full border border-border/70 bg-background/70 py-1.5 pl-1.5 pr-3 text-sm font-semibold transition-colors hover:bg-accent"
+              >
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-gradient text-xs font-bold text-white">
+                  {(user.name?.[0] ?? "U").toUpperCase()}
+                </span>
+                <span className="max-w-[7rem] truncate">{firstName}</span>
+                <ChevronDown
+                  className={cn(
+                    "h-3.5 w-3.5 transition-transform",
+                    userMenuOpen && "rotate-180"
+                  )}
+                />
+              </button>
+              <AnimatePresence>
+                {userMenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ duration: 0.16 }}
+                    className="absolute right-0 top-full pt-2"
+                  >
+                    <div className="w-52 overflow-hidden rounded-2xl border border-border/60 bg-background/95 p-1.5 shadow-xl backdrop-blur-xl">
+                      <Link
+                        href="/security"
+                        onClick={() => setUserMenuOpen(false)}
+                        className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-semibold text-muted-foreground transition-all hover:bg-brand-600 hover:text-white"
+                      >
+                        <UserRound className="h-4 w-4" />
+                        Security Center
+                      </Link>
+                      <button
+                        onClick={() => {
+                          setUserMenuOpen(false);
+                          void logout();
+                        }}
+                        className="flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-semibold text-muted-foreground transition-all hover:bg-red-600 hover:text-white"
+                      >
+                        <LogOut className="h-4 w-4" />
+                        Log out
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          )}
+
           <Button asChild variant="gradient" size="sm" className="hidden sm:flex">
             <Link href="/assistant">Try AI Assistant</Link>
           </Button>
@@ -199,6 +272,36 @@ export function Navbar() {
                     {link.label}
                   </Link>
                 )
+              )}
+              {!loading && !user && (
+                <Button asChild variant="outline" className="mt-2">
+                  <Link href="/login" onClick={() => setMobileOpen(false)}>
+                    <LogIn className="h-4 w-4" />
+                    Log In
+                  </Link>
+                </Button>
+              )}
+              {!loading && user && (
+                <>
+                  <Link
+                    href="/security"
+                    onClick={() => setMobileOpen(false)}
+                    className="mt-2 flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-bold text-foreground transition-all hover:bg-brand-600 hover:text-white"
+                  >
+                    <UserRound className="h-4 w-4" />
+                    Security Center
+                  </Link>
+                  <button
+                    onClick={() => {
+                      setMobileOpen(false);
+                      void logout();
+                    }}
+                    className="flex items-center gap-2 rounded-lg px-4 py-3 text-left text-sm font-bold text-foreground transition-all hover:bg-red-600 hover:text-white"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Log out
+                  </button>
+                </>
               )}
               <Button asChild variant="gradient" className="mt-2">
                 <Link href="/assistant" onClick={() => setMobileOpen(false)}>

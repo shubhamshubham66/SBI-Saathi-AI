@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { AuthProvider } from "@/components/auth/auth-provider";
 import { CookieConsent } from "@/components/layout/cookie-consent";
 
 const inter = Inter({
@@ -83,8 +84,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
-          <CookieConsent />
+          <AuthProvider>
+            {children}
+            <CookieConsent />
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

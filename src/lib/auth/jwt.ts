@@ -15,12 +15,15 @@ export type UserRole = "guest" | "user" | "agent" | "admin";
 export interface AccessClaims extends JWTPayload {
   sub: string; // user id
   role: UserRole;
+  name?: string;
   typ: "access";
 }
 
 export interface RefreshClaims extends JWTPayload {
   sub: string;
   typ: "refresh";
+  name?: string;
+  role?: UserRole;
   // Token family id for rotation/reuse detection.
   fam: string;
 }
@@ -41,9 +44,10 @@ function refreshSecret(): Uint8Array {
 
 export async function signAccessToken(
   userId: string,
-  role: UserRole
+  role: UserRole,
+  name?: string
 ): Promise<string> {
-  return new SignJWT({ role, typ: "access" })
+  return new SignJWT({ role, typ: "access", ...(name ? { name } : {}) })
     .setProtectedHeader({ alg: "HS256" })
     .setSubject(userId)
     .setIssuedAt()
@@ -55,9 +59,15 @@ export async function signAccessToken(
 
 export async function signRefreshToken(
   userId: string,
-  family: string
+  family: string,
+  meta?: { name?: string; role?: UserRole }
 ): Promise<string> {
-  return new SignJWT({ typ: "refresh", fam: family })
+  return new SignJWT({
+    typ: "refresh",
+    fam: family,
+    ...(meta?.name ? { name: meta.name } : {}),
+    ...(meta?.role ? { role: meta.role } : {}),
+  })
     .setProtectedHeader({ alg: "HS256" })
     .setSubject(userId)
     .setIssuedAt()
@@ -102,14 +112,14 @@ export async function verifyRefreshToken(
  * refresh pair in the same family. Returns null if the old token is invalid.
  */
 export async function rotateTokens(
-  oldRefresh: string,
-  role: UserRole
-): Promise<{ accessToken: string; refreshToken: string } | null> {
+  oldRefresh: string
+): Promise<{ accessToken: string; refreshToken: string; claims: RefreshClaims } | null> {
   const claims = await verifyRefreshToken(oldRefresh);
   if (!claims?.sub || !claims.fam) return null;
+  const role = claims.role ?? "user";
   const [accessToken, refreshToken] = await Promise.all([
-    signAccessToken(claims.sub, role),
-    signRefreshToken(claims.sub, claims.fam),
+    signAccessToken(claims.sub, role, claims.name),
+    signRefreshToken(claims.sub, claims.fam, { name: claims.name, role }),
   ]);
-  return { accessToken, refreshToken };
+  return { accessToken, refreshToken, claims };
 }
