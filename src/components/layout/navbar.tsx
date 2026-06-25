@@ -51,7 +51,7 @@ export function Navbar() {
             <Link
               key={link.label}
               href={link.href}
-              className="rounded-full px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              className="rounded-full px-3.5 py-2 text-sm font-bold text-foreground transition-all hover:bg-brand-600 hover:text-white"
             >
               {link.label}
             </Link>
@@ -92,7 +92,7 @@ export function Navbar() {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                  className="rounded-lg px-4 py-3 text-sm font-bold text-foreground transition-all hover:bg-brand-600 hover:text-white"
                 >
                   {link.label}
                 </Link>
