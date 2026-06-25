@@ -20,11 +20,11 @@ export function LanguagesMarquee() {
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-background to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-background to-transparent" />
 
-        <div className="flex w-max animate-marquee gap-4">
+        <div className="flex w-max flex-nowrap items-center animate-marquee gap-3">
           {items.map((lang, i) => (
             <span
               key={`${lang}-${i}`}
-              className="rounded-full border border-border/70 bg-background/60 px-5 py-2.5 text-base font-medium backdrop-blur"
+              className="shrink-0 whitespace-nowrap rounded-full border border-border/70 bg-background/60 px-5 py-2.5 text-base font-semibold backdrop-blur"
             >
               {lang}
             </span>
