@@ -103,6 +103,21 @@ const config: Config = {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(-50%)" },
         },
+        "spin-slow": {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
+        },
+        "bar-rise": {
+          "0%, 100%": { transform: "scaleY(0.45)" },
+          "50%": { transform: "scaleY(1)" },
+        },
+        "pulse-node": {
+          "0%, 100%": { opacity: "0.35", transform: "scale(0.85)" },
+          "50%": { opacity: "1", transform: "scale(1.15)" },
+        },
+        "dash-flow": {
+          to: { "stroke-dashoffset": "-200" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -111,6 +126,10 @@ const config: Config = {
         float: "float 6s ease-in-out infinite",
         shimmer: "shimmer 1.5s infinite",
         marquee: "marquee 30s linear infinite",
+        "spin-slow": "spin-slow 60s linear infinite",
+        "bar-rise": "bar-rise 2.4s ease-in-out infinite",
+        "pulse-node": "pulse-node 3s ease-in-out infinite",
+        "dash-flow": "dash-flow 3s linear infinite",
       },
     },
   },
