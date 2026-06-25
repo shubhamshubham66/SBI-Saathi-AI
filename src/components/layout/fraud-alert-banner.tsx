@@ -42,7 +42,7 @@ export function FraudAlertBanner({
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
           role="alert"
-          className="overflow-hidden border-b-2 border-amber-400 bg-amber-50 dark:bg-amber-900/30"
+          className="overflow-hidden border-b-2 border-amber-400 bg-amber-50 dark:bg-amber-900/30 mt-16"
         >
           <div className="container flex items-start gap-3 px-4 py-3 sm:items-center sm:px-6">
             <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400 sm:mt-0" />

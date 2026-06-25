@@ -16,7 +16,7 @@ export default function SecurityPage() {
     <>
       <Navbar />
       <FraudAlertBanner />
-      <main id="main-content" className="pt-24">
+      <main id="main-content" className="pt-8">
         <header className="container relative pb-10 text-center">
           <div className="pointer-events-none absolute inset-0 -z-10 bg-hero-glow" />
           <h1 className="mx-auto max-w-3xl text-3xl font-bold tracking-tight sm:text-4xl">

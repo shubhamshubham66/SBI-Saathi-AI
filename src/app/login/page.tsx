@@ -17,7 +17,7 @@ export default function LoginPage() {
     <>
       <Navbar />
       <FraudAlertBanner />
-      <main id="main-content" className="relative flex min-h-[80vh] items-center py-24">
+      <main id="main-content" className="relative flex min-h-[80vh] items-center pb-24 pt-8">
         <div className="pointer-events-none absolute inset-0 -z-10 bg-hero-glow" />
         <div className="container">
           <Suspense fallback={null}>
