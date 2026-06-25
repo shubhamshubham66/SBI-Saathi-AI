@@ -24,18 +24,6 @@ export default function Home() {
         <Hero />
         <LanguagesMarquee />
 
-        {/* SBI Banner — 50% width, centered */}
-        <section className="container py-10">
-          <div className="mx-auto w-1/2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/sbi-banner.jpg"
-              alt="SBI Saathi AI Banner"
-              className="w-full rounded-3xl object-cover shadow-xl"
-            />
-          </div>
-        </section>
-
         <PortalServices />
         <TrustMetrics />
         <ImpactDetails />

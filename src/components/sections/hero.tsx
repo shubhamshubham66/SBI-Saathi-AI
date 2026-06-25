@@ -159,27 +159,37 @@ export function Hero() {
     <section className="relative overflow-hidden pt-28 pb-20 sm:pt-36">
       {/* ---- Split themed background ---- */}
       <div className="pointer-events-none absolute inset-0 -z-10">
+        {/* SBI Banner as background */}
+        <img
+          src="/sbi-banner.jpg"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        {/* Overlay to keep text readable */}
+        <div className="absolute inset-0 bg-background/80 dark:bg-background/90" />
+
         {/* warm left side */}
-        <div className="absolute inset-y-0 left-0 w-3/5 bg-gradient-to-r from-amber-100/80 via-orange-50/50 to-transparent dark:from-amber-500/[0.07] dark:via-orange-500/[0.03] dark:to-transparent" />
-        <div className="absolute -left-16 top-10 text-amber-500/30 dark:text-amber-300/10">
+        <div className="absolute inset-y-0 left-0 w-3/5 bg-gradient-to-r from-amber-100/60 via-orange-50/30 to-transparent dark:from-amber-500/[0.05] dark:via-orange-500/[0.02] dark:to-transparent" />
+        <div className="absolute -left-16 top-10 text-amber-500/20 dark:text-amber-300/10">
           <Mandala className="h-72 w-72 animate-spin-slow" />
         </div>
-        <div className="absolute left-24 bottom-0 text-orange-500/20 dark:text-amber-300/10">
+        <div className="absolute left-24 bottom-0 text-orange-500/10 dark:text-amber-300/10">
           <Mandala className="h-44 w-44 animate-spin-slow [animation-direction:reverse]" />
         </div>
 
         {/* futuristic right side */}
-        <div className="absolute inset-y-0 right-0 w-3/5 bg-gradient-to-l from-brand-900/90 via-brand-800/40 to-transparent dark:from-brand-950 dark:via-brand-900/50 dark:to-transparent" />
-        <div className="absolute right-0 top-0 h-full w-2/5 opacity-70">
+        <div className="absolute inset-y-0 right-0 w-3/5 bg-gradient-to-l from-brand-900/70 via-brand-800/30 to-transparent dark:from-brand-950/80 dark:via-brand-900/40 dark:to-transparent" />
+        <div className="absolute right-0 top-0 h-full w-2/5 opacity-50">
           <DigitalGrid />
         </div>
-        <div className="absolute right-10 bottom-16 hidden opacity-80 lg:block">
+        <div className="absolute right-10 bottom-16 hidden opacity-60 lg:block">
           <ChartBars />
         </div>
 
-        {/* center wash to keep text legible across both themes */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background" />
-        <div className="absolute left-1/2 top-0 h-96 w-[40rem] -translate-x-1/2 rounded-full bg-background/60 blur-3xl" />
+        {/* center wash to keep text legible */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/30 to-background" />
+        <div className="absolute left-1/2 top-0 h-96 w-[40rem] -translate-x-1/2 rounded-full bg-background/40 blur-3xl" />
       </div>
 
       <div className="container relative">
