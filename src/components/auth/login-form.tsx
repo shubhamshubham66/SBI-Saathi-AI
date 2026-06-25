@@ -22,7 +22,6 @@ export function LoginForm() {
   const [otp, setOtp] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
-  const [devOtp, setDevOtp] = React.useState<string | null>(null);
 
   const timedOut = params.get("reason") === "timeout";
 
@@ -41,7 +40,6 @@ export function LoginForm() {
         setError(data.error ?? "Couldn't send the code. Please try again.");
         return;
       }
-      setDevOtp(data.devOtp ?? null);
       setStep("otp");
     } catch {
       setError("Network error. Please check your connection and retry.");
@@ -183,11 +181,6 @@ export function LoginForm() {
               onSubmit={verify}
               className="space-y-4"
             >
-              {devOtp && (
-                <p className="rounded-lg bg-brand-500/10 px-3 py-2 text-center text-sm text-brand-700 dark:text-brand-300">
-                  Demo code (no SMS gateway configured): <strong>{devOtp}</strong>
-                </p>
-              )}
               <div>
                 <label htmlFor="otp" className="mb-1.5 block text-sm font-medium">
                   6-digit code
