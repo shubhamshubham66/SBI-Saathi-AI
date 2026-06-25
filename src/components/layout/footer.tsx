@@ -12,8 +12,9 @@ const companyLinks = [
 
 const supportLinks = [
   { label: "Help Center", href: "/contact" },
-  { label: "Privacy", href: "#" },
-  { label: "Terms", href: "#" },
+  { label: "Security Center", href: "/security" },
+  { label: "Privacy", href: "/privacy" },
+  { label: "Terms", href: "/terms" },
 ];
 
 const socials = [

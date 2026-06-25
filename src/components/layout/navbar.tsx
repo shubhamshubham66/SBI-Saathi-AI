@@ -59,6 +59,8 @@ export function Navbar() {
               >
                 <Link
                   href={link.href}
+                  aria-haspopup="true"
+                  aria-expanded={openDropdown === link.label}
                   className="flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-bold text-foreground transition-all hover:bg-brand-600 hover:text-white"
                 >
                   {link.label}

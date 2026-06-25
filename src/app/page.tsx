@@ -12,6 +12,7 @@ import { HowItWorks } from "@/components/sections/how-it-works";
 import { WorkflowPipeline } from "@/components/sections/workflow-pipeline";
 import { SchemeHighlights } from "@/components/sections/scheme-highlights";
 import { Testimonials } from "@/components/sections/testimonials";
+import { SecurityTrust } from "@/components/sections/security-trust";
 import { Faq } from "@/components/sections/faq";
 import { CallToAction } from "@/components/sections/cta";
 
@@ -19,7 +20,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main-content">
         <Hero />
         <LanguagesMarquee />
         <PortalServices />
@@ -31,6 +32,7 @@ export default function Home() {
         <WorkflowPipeline />
         <SchemeHighlights />
         <Testimonials />
+        <SecurityTrust />
         <Faq />
         <CallToAction />
       </main>

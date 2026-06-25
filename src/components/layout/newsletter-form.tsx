@@ -12,6 +12,7 @@ type Status = "idle" | "loading" | "success" | "error";
  */
 export function NewsletterForm() {
   const [email, setEmail] = React.useState("");
+  const [company, setCompany] = React.useState(""); // honeypot
   const [status, setStatus] = React.useState<Status>("idle");
   const [message, setMessage] = React.useState("");
 
@@ -25,7 +26,7 @@ export function NewsletterForm() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, company }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data?.error ?? "Something went wrong.");
@@ -71,6 +72,16 @@ export function NewsletterForm() {
               placeholder="Your email address"
               aria-label="Email address"
               className="min-w-0 flex-1 bg-transparent px-3 py-1.5 text-sm outline-none placeholder:text-muted-foreground"
+            />
+            {/* Honeypot field for spam bots. */}
+            <input
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+              className="absolute left-[-9999px] h-0 w-0 overflow-hidden"
             />
             <button
               type="submit"

@@ -16,6 +16,7 @@ export function ContactForm() {
     email: "",
     subject: "",
     message: "",
+    company: "", // honeypot — must stay empty
   });
   const [status, setStatus] = React.useState<Status>("idle");
   const [feedback, setFeedback] = React.useState("");
@@ -42,7 +43,7 @@ export function ContactForm() {
       if (!res.ok) throw new Error(data?.error ?? "Something went wrong.");
       setStatus("success");
       setFeedback(data.message as string);
-      setForm({ name: "", email: "", subject: "", message: "" });
+      setForm({ name: "", email: "", subject: "", message: "", company: "" });
     } catch (err) {
       setStatus("error");
       setFeedback(
@@ -78,6 +79,19 @@ export function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="glass-card space-y-5 rounded-3xl p-6 sm:p-8">
+      {/* Honeypot: hidden from real users, lures spam bots. */}
+      <div aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 overflow-hidden">
+        <label htmlFor="company">Company (leave blank)</label>
+        <input
+          id="company"
+          name="company"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={form.company}
+          onChange={update("company")}
+        />
+      </div>
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className="text-sm font-medium">
@@ -137,7 +151,7 @@ export function ContactForm() {
       </div>
 
       {status === "error" && (
-        <p className="rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive">
+        <p role="alert" className="rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive">
           {feedback}
         </p>
       )}
