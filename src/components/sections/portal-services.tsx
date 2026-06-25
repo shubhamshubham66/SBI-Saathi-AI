@@ -10,7 +10,8 @@ import { Reveal } from "@/components/motion/reveal";
 export function PortalServices() {
   return (
     <section className="relative py-16 sm:py-20">
-      <div className="container">
+      <div className="pointer-events-none absolute inset-0 bg-grid pattern-mask opacity-60" />
+      <div className="container relative">
         <Reveal className="mx-auto max-w-2xl text-center">
           <span className="inline-flex items-center rounded-full bg-accent px-4 py-1.5 text-sm font-medium text-brand-700 dark:text-brand-300">
             Your banking companion, all in one place

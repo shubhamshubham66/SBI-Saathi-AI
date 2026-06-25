@@ -3,8 +3,9 @@ import { Reveal } from "@/components/motion/reveal";
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-20 sm:py-28">
-      <div className="container">
+    <section id="how-it-works" className="relative py-20 sm:py-28">
+      <div className="pointer-events-none absolute inset-0 bg-dots pattern-mask opacity-60" />
+      <div className="container relative">
         <Reveal className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
             How it works
