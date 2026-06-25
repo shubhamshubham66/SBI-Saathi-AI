@@ -183,86 +183,148 @@ export function Hero() {
       </div>
 
       <div className="container relative">
-        <div className="mx-auto max-w-3xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mx-auto inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-4 py-1.5 text-sm font-medium text-muted-foreground shadow-sm backdrop-blur"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-500" />
-            </span>
-            Multilingual voice &amp; text banking assistant
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.05 }}
-            className="mt-6 text-balance text-4xl font-bold tracking-tight sm:text-6xl"
-          >
-            Banking{" "}
-            <span className="text-gradient animated-gradient">Made Simple</span>
-            <br className="hidden sm:block" /> for every Indian.
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.12 }}
-            className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground"
-          >
-            Meet Saathi — a warm, multilingual AI companion that helps you bank
-            by voice or text in 20+ Indian languages. No forms to fear, no
-            jargon to decode. Just ask, and get clear guidance.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.18 }}
-            className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
-          >
-            <Button asChild variant="default" size="lg" className="w-full sm:w-auto">
-              <Link href="/assistant">
-                <Mic className="h-5 w-5" />
-                Try AI Assistant
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="w-full border-border/60 bg-background/50 sm:w-auto"
+        {/* ---- Two vertical halves: text on the left, chatbot on the right ---- */}
+        <div className="grid items-center gap-12 lg:grid-cols-2">
+          {/* LEFT 50% — copy, CTAs, suggestion chips */}
+          <div className="text-center lg:text-left">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-4 py-1.5 text-sm font-medium text-muted-foreground shadow-sm backdrop-blur"
             >
-              <Link href="#how-it-works">
-                <PlayCircle className="h-5 w-5" />
-                Watch Demo
-              </Link>
-            </Button>
-          </motion.div>
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-500" />
+              </span>
+              Multilingual voice &amp; text banking assistant
+            </motion.div>
 
-          {/* Suggestion chips */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.24 }}
-            className="mt-9 flex flex-wrap items-center justify-center gap-2"
-          >
-            <span className="text-sm font-medium text-muted-foreground">
-              Try asking:
-            </span>
-            {heroChips.map((chip) => (
-              <Link
-                key={chip}
-                href={`/assistant?q=${encodeURIComponent(chip)}`}
-                className="rounded-full border border-border/70 bg-background/70 px-3.5 py-1.5 text-sm shadow-sm backdrop-blur transition-all hover:-translate-y-0.5 hover:border-brand-300 hover:bg-accent"
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.05 }}
+              className="mt-6 text-balance text-4xl font-bold tracking-tight sm:text-5xl xl:text-6xl"
+            >
+              Banking{" "}
+              <span className="text-gradient animated-gradient">Made Simple</span>
+              <br className="hidden sm:block" /> for every Indian.
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.12 }}
+              className="mx-auto mt-6 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground lg:mx-0"
+            >
+              Meet Saathi — a warm, multilingual AI companion that helps you bank
+              by voice or text in 20+ Indian languages. No forms to fear, no
+              jargon to decode. Just ask, and get clear guidance.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.18 }}
+              className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start"
+            >
+              <Button asChild variant="default" size="lg" className="w-full sm:w-auto">
+                <Link href="/assistant">
+                  <Mic className="h-5 w-5" />
+                  Try AI Assistant
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="w-full border-border/60 bg-background/50 sm:w-auto"
               >
-                {chip}
-              </Link>
-            ))}
+                <Link href="#how-it-works">
+                  <PlayCircle className="h-5 w-5" />
+                  Watch Demo
+                </Link>
+              </Button>
+            </motion.div>
+
+            {/* Suggestion chips */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.24 }}
+              className="mt-9 flex flex-wrap items-center justify-center gap-2 lg:justify-start"
+            >
+              <span className="text-sm font-medium text-muted-foreground">
+                Try asking:
+              </span>
+              {heroChips.map((chip) => (
+                <Link
+                  key={chip}
+                  href={`/assistant?q=${encodeURIComponent(chip)}`}
+                  className="rounded-full border border-border/70 bg-background/70 px-3.5 py-1.5 text-sm shadow-sm backdrop-blur transition-all hover:-translate-y-0.5 hover:border-brand-300 hover:bg-accent"
+                >
+                  {chip}
+                </Link>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* RIGHT 50% — Saathi chatbot */}
+          <motion.div
+            initial={{ opacity: 0, y: 32, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="mx-auto w-full max-w-md"
+          >
+            <div className="glass-card rounded-3xl p-5 shadow-xl sm:p-6">
+              <div className="mb-4 flex items-center gap-2 border-b border-border/50 pb-3">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-gradient text-white">
+                  <Sparkles className="h-4 w-4" />
+                </span>
+                <span className="text-sm font-semibold">Saathi</span>
+                <span className="ml-auto inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+                  </span>
+                  Online
+                </span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-gradient text-white">
+                  <Sparkles className="h-5 w-5" />
+                </span>
+                <div className="rounded-2xl rounded-tl-sm bg-accent px-4 py-3 text-left text-sm">
+                  Namaste! 🙏 I&apos;m Saathi. Would you like help activating UPI,
+                  finding a savings scheme, or something else today?
+                </div>
+              </div>
+              <div className="mt-4 flex justify-end">
+                <div className="rounded-2xl rounded-tr-sm bg-brand-600 px-4 py-3 text-sm text-white">
+                  Mujhe UPI chalu karna hai 🙂
+                </div>
+              </div>
+
+              {/* input box */}
+              <div className="mt-5 flex items-center gap-2 rounded-2xl border border-border/70 bg-background/70 p-1.5 pl-4">
+                <span className="flex-1 text-left text-sm text-muted-foreground">
+                  Type or speak your question…
+                </span>
+                <button
+                  aria-label="Voice input"
+                  className="flex h-9 w-9 items-center justify-center rounded-xl text-muted-foreground transition-colors hover:bg-accent hover:text-brand-600"
+                >
+                  <Mic className="h-4 w-4" />
+                </button>
+                <button
+                  aria-label="Send message"
+                  className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-gradient text-white shadow-md transition-transform hover:scale-105"
+                >
+                  <Send className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
           </motion.div>
         </div>
 
@@ -300,64 +362,6 @@ export function Hero() {
             </motion.div>
           ))}
         </div>
-
-        {/* ---- Floating chat preview ---- */}
-        <motion.div
-          initial={{ opacity: 0, y: 32, scale: 0.97 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto mt-14 max-w-xl"
-        >
-          <div className="glass-card rounded-3xl p-5 shadow-xl sm:p-6">
-            <div className="mb-4 flex items-center gap-2 border-b border-border/50 pb-3">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-gradient text-white">
-                <Sparkles className="h-4 w-4" />
-              </span>
-              <span className="text-sm font-semibold">Saathi</span>
-              <span className="ml-auto inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
-                </span>
-                Online
-              </span>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-gradient text-white">
-                <Sparkles className="h-5 w-5" />
-              </span>
-              <div className="rounded-2xl rounded-tl-sm bg-accent px-4 py-3 text-left text-sm">
-                Namaste! 🙏 I&apos;m Saathi. Would you like help activating UPI,
-                finding a savings scheme, or something else today?
-              </div>
-            </div>
-            <div className="mt-4 flex justify-end">
-              <div className="rounded-2xl rounded-tr-sm bg-brand-600 px-4 py-3 text-sm text-white">
-                Mujhe UPI chalu karna hai 🙂
-              </div>
-            </div>
-
-            {/* input box */}
-            <div className="mt-5 flex items-center gap-2 rounded-2xl border border-border/70 bg-background/70 p-1.5 pl-4">
-              <span className="flex-1 text-left text-sm text-muted-foreground">
-                Type or speak your question…
-              </span>
-              <button
-                aria-label="Voice input"
-                className="flex h-9 w-9 items-center justify-center rounded-xl text-muted-foreground transition-colors hover:bg-accent hover:text-brand-600"
-              >
-                <Mic className="h-4 w-4" />
-              </button>
-              <button
-                aria-label="Send message"
-                className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-gradient text-white shadow-md transition-transform hover:scale-105"
-              >
-                <Send className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
