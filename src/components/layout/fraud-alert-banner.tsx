@@ -42,17 +42,17 @@ export function FraudAlertBanner({
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
           role="alert"
-          className="overflow-hidden border-b border-amber-500/30 bg-amber-500/10"
+          className="overflow-hidden border-b-2 border-amber-400 bg-amber-50 dark:bg-amber-900/30"
         >
-          <div className="container flex items-center gap-3 py-2.5">
-            <ShieldAlert className="h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" />
-            <p className="flex-1 text-xs font-medium text-amber-800 dark:text-amber-200 sm:text-sm">
+          <div className="container flex items-start gap-3 px-4 py-3 sm:items-center sm:px-6">
+            <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400 sm:mt-0" />
+            <p className="flex-1 text-sm font-medium leading-relaxed text-amber-900 dark:text-amber-100">
               {message}
             </p>
             <button
               aria-label="Dismiss fraud safety alert"
               onClick={dismiss}
-              className="flex h-7 w-7 items-center justify-center rounded-lg text-amber-700 transition-colors hover:bg-amber-500/20 dark:text-amber-300"
+              className="ml-2 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-amber-700 transition-colors hover:bg-amber-200 dark:text-amber-300 dark:hover:bg-amber-800"
             >
               <X className="h-4 w-4" />
             </button>
