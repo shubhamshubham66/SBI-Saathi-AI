@@ -15,7 +15,6 @@ import { Testimonials } from "@/components/sections/testimonials";
 import { SecurityTrust } from "@/components/sections/security-trust";
 import { Faq } from "@/components/sections/faq";
 import { CallToAction } from "@/components/sections/cta";
-import Image from "next/image";
 
 export default function Home() {
   return (
@@ -27,14 +26,12 @@ export default function Home() {
 
         {/* SBI Banner — 50% width, centered */}
         <section className="container py-10">
-          <div className="mx-auto w-full max-w-[50%] overflow-hidden rounded-3xl shadow-xl">
-            <Image
+          <div className="mx-auto w-1/2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src="/sbi-banner.jpg"
               alt="SBI Saathi AI Banner"
-              width={800}
-              height={400}
-              className="w-full object-cover"
-              priority
+              className="w-full rounded-3xl object-cover shadow-xl"
             />
           </div>
         </section>
