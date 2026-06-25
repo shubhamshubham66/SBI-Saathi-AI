@@ -24,6 +24,74 @@ discovering government schemes, and learning the basics — without the jargon.
 | AI           | **Google Gemini** / **OpenAI**                        |
 | Voice        | **Web Speech API** (Speech-to-Text & Text-to-Speech)  |
 | Charts       | **Recharts**                                          |
+| **Auth**     | **JWT (jose)** access + refresh tokens, **OTP** login |
+| **Security** | CSP, HSTS, rate limiting, CSRF, audit logging         |
+
+---
+
+## 🔐 Enterprise-Grade Security & Trust (Banking Standard)
+
+> SBI Saathi AI is engineered to **banking-grade security standards** — not as an
+> afterthought, but baked into every layer. Below is exactly what protects the
+> user, the data, and the platform. 🛡️
+
+### 🔒 Security hardening
+
+| Area | What we implemented | Where |
+| ---- | ------------------- | ----- |
+| **HTTPS enforcement** | Auto-upgrade + redirect HTTP → HTTPS, `Strict-Transport-Security` (HSTS, 2-yr preload) | `next.config.mjs`, `middleware.ts` |
+| **Content Security Policy** | Locked-down CSP to block XSS / injection / clickjacking | `next.config.mjs` |
+| **Secure HTTP headers** | `X-Frame-Options: DENY`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, COOP/CORP, no `X-Powered-By` | `next.config.mjs` |
+| **Rate limiting** | Per-IP + per-route sliding-window limiter (anti brute-force / DoS) | `middleware.ts`, `lib/security/rate-limit.ts` |
+| **CSRF protection** | Signed double-submit token (HMAC, constant-time compare) | `lib/security/csrf.ts` |
+| **Input validation + sanitization** | Zod schemas + HTML escaping, NoSQL-injection & link-spam detection | `lib/security/sanitize.ts`, `api-handler.ts` |
+| **Audit logging** | Structured security event log + 365-day TTL persistence | `lib/security/audit.ts`, `models/AuditLog.ts` |
+| **Failed-login monitoring** | Per-account lockout after repeated failures | `lib/security/audit.ts` |
+| **Anti-spam** | Honeypot fields on every public form | contact / newsletter / login |
+| **Env protection** | Validated, server-only secrets with redaction | `lib/security/env.ts` |
+
+### 🔑 Authentication & sessions
+
+| Feature | Detail |
+| ------- | ------ |
+| **Passwordless OTP login** | Sign in with **name + mobile number** → 6-digit OTP (scrypt-hashed, 5-min TTL, max attempts) |
+| **JWT sessions** | Short-lived **access token (15m)** + rotating **refresh token (7d)** |
+| **Secure cookies** | `HttpOnly` + `Secure` + `SameSite=Strict` — tokens never exposed to JS |
+| **Role-Based Access Control** | `guest → user → agent → admin` with inherited permissions |
+| **Session timeout** | Auto sign-out after 10 min of inactivity |
+
+### 🧾 Privacy & compliance
+
+- **Privacy Policy** & **Terms** pages (`/privacy`, `/terms`)
+- **Cookie consent** banner with stored preference
+- **Data minimisation** + transparency, and a clear *"we never ask for OTP/PIN"* promise
+- **Security Center** (`/security`) — account protection, **login history**, **activity logs**, **device recognition**, **fraud-alert banner**
+
+### ♿ Accessibility & ⚡ performance
+
+- **WCAG-minded**: skip-to-content link, visible focus rings, ARIA labels, `prefers-reduced-motion`
+- **SEO + PWA**: rich metadata, OpenGraph, `robots.ts`, `sitemap.ts`, `manifest.ts`
+- **Fast**: AVIF/WebP images, `next/font`, compression, automatic code-splitting
+
+### 🏦 Why this matters — for the bank
+
+- ✅ **Builds customer trust** — visible, banking-grade safety on every page
+- ✅ **Reduces fraud & support cost** — proactive scam warnings + lockouts + audit trails
+- ✅ **Compliance-ready** — audit logging, data retention, privacy controls out of the box
+- ✅ **Inclusive & scalable** — secure access for 500M+ users across 20+ languages
+- ✅ **Lower risk** — defence-in-depth means fewer incidents and faster investigations
+
+### 🏆 Why this wins — for our project / hackathon
+
+- 🚀 **Production-ready, not a prototype** — real middleware, real auth, real headers
+- 🧱 **Defence-in-depth architecture** — every layer hardened, cleanly modular & reusable
+- 📊 **Demonstrable** — Security Center UI + audit logs make the security *visible* to judges
+- 🔧 **Zero-config demo** — OTP works on screen without an SMS gateway; drop in a provider for prod
+- 💯 **Passes `lint`, `typecheck`, `build`** with strict TypeScript
+
+> 🔎 **Run a quick security check:** after `npm run build && npm start`, inspect the
+> response headers (`curl -I http://localhost:3000`) to see CSP, HSTS and the
+> hardened header set in action.
 
 ---
 
@@ -90,6 +158,12 @@ cp .env.example .env.local
 
 Then open `.env.local` and add your `MONGODB_URI` and one AI key
 (`GEMINI_API_KEY` or `OPENAI_API_KEY`).
+
+> **🔐 For production**, also set strong security secrets (min 32 chars each):
+> `JWT_SECRET`, `JWT_REFRESH_SECRET`, `CSRF_SECRET` — generate with
+> `openssl rand -base64 48`. To send real OTP SMS, add an SMS provider key
+> (`MSG91_AUTH_KEY` / `TWILIO_ACCOUNT_SID`+`TWILIO_AUTH_TOKEN` / `FAST2SMS_API_KEY`).
+> Without one, the login OTP is safely shown on screen for demo/testing.
 
 ### 4. Run the dev server
 
